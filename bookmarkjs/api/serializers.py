@@ -12,6 +12,7 @@ class UserRegisterSerializer( serializers.ModelSerializer):
     class Meta:
         model = User
         fields = [
+            "username",
             "email",
             "password",
             "password1",
@@ -25,8 +26,9 @@ class UserRegisterSerializer( serializers.ModelSerializer):
         email = validated_data["email"]
         password = validated_data["password"]
         password1 = validated_data["password1"]
+        username = validated_data["username"]
         if password == password1:
-            user = User(email=email)
+            user = User(email=email,username=username)
             user.set_password(password)
             user.save()
             return user
